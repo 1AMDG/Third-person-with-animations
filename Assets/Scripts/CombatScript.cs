@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class CombatScript : MonoBehaviour
 {
+    public Player1 script1;
     public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
+         GameObject script1 = GameObject.Find("rotfix character");
+         script1.GetComponent<Player1>().enabled = true;
         // anim = gameObject.GetComponent<Animator>();
         anim.SetBool("isAiming", false);
     }
@@ -17,10 +20,11 @@ public class CombatScript : MonoBehaviour
     {
         if (Input.GetMouseButton(1)){
             anim.SetBool("isAiming", true);
+            script1.GetComponent<Player1>().enabled = false;
+            
         } else {
-      
-
             anim.SetBool("isAiming", false);
+            script1.GetComponent<Player1>().enabled = true;
         }
     }
 }
