@@ -14,6 +14,8 @@ public class Player1 : MonoBehaviour
     Vector3 camRight;
 
     Vector2 input;
+    Vector2 lookAround;
+    
 
     //physics
     Vector3 intent;
@@ -44,6 +46,7 @@ public class Player1 : MonoBehaviour
 
         input = new Vector2 (Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
         input = Vector2.ClampMagnitude(input, 1);
+        lookAround = new Vector2 (Input.GetAxisRaw("Mouse X"),Input.GetAxisRaw("Vertical"));
     }
     void CalculateCamera(){
         // print ("workywokry");
@@ -60,12 +63,18 @@ public class Player1 : MonoBehaviour
     void DoMove(){
         intent = camForward*input.y + camRight*input.x;
 
-        if(input.magnitude > 0){
-            Quaternion rot = Quaternion.LookRotation(intent);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, turnSpeed*Time.deltaTime);
-        }
+        if (!animator.GetBool("isAiming")) {
+            if(input.magnitude > 0){
+                Quaternion rot = Quaternion.LookRotation(intent);
+                transform.rotation = Quaternion.Lerp(transform.rotation, rot, turnSpeed*Time.deltaTime);
+            }
 
-        velo = Vector3.Lerp(velo, transform.forward*input.magnitude*speed, accel*Time.deltaTime);
+            velo = Vector3.Lerp(velo, transform.forward*input.magnitude*speed, accel*Time.deltaTime);
+        } else {
+            velo = Vector3.Lerp(velo, transform.TransformPoint(-intent)*speed, accel*Time.deltaTime);    
+            
+            
+        }
 
         control.Move(velo*Time.deltaTime);
 

@@ -25,7 +25,7 @@ public class PlayerFollow1 : MonoBehaviour
         Vector3 newPos = PlayerTransform.position + _cameraOffset;
 
         // Debug.Log(SmoothFactor);
-        transform.position = Vector3.Slerp(transform.position, newPos, SmoothFactor);
+        transform.position = newPos;
 
         // print ("works");
     }
