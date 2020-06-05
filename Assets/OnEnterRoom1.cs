@@ -2,17 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OnEnterRoom1 : MonoBehaviour
-{
+public class OnEnterRoom1 : MonoBehaviour {
+
+    public GameObject ccamC;
+    public GameObject ccamM;
+    public GameObject ccamZ;
+
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Start () {
+        ccamM.SetActive (true);
+        ccamC.SetActive (false);
+        ccamZ.SetActive (false);
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void OnTriggerEnter (Collider collider) {
+        if (collider.gameObject.tag == "Player") {
+            ccamM.SetActive (false);
+            ccamC.SetActive (false);
+            ccamZ.SetActive (true);
+        }
+    }
+    void OnTriggerExit (Collider collider) {
+        if (collider.gameObject.tag == "Player") {
+            ccamM.SetActive (true);
+            ccamC.SetActive (false);
+            ccamZ.SetActive (false);
+        }
     }
 }
