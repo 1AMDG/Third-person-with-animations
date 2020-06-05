@@ -13,6 +13,7 @@ public class CameraSwitch : MonoBehaviour
     {
         Cursor.visible = false;
         isMenu = false;
+        camM.SetActive(true);
     }
 
     // Update is called once per frame

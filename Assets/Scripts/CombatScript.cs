@@ -20,11 +20,11 @@ public class CombatScript : MonoBehaviour
     {
         if (Input.GetMouseButton(1)){
             anim.SetBool("isAiming", true);
-            script1.GetComponent<Player1>().enabled = false;
+            // script1.GetComponent<Player1>().enabled = false;
             
         } else {
             anim.SetBool("isAiming", false);
-            script1.GetComponent<Player1>().enabled = true;
+            // script1.GetComponent<Player1>().enabled = true;
         }
     }
 }
